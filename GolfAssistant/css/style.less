@@ -1,0 +1,235 @@
+// Main colors
+@primary-color: #51b881;
+@color-on-primary: #fff;
+@font-color: #51b881;
+@background-color: #e4e8e9;
+
+// Form
+@input-border-color: #d7e1e2;
+@placeholder-color: #d7e1e2;
+@form-margin: 0.5em;
+@form-padding: 0.6em;
+@label-color: darken(#d7e1e2, 20%);
+
+// Button
+@button-background-color: @primary-color;
+@button-color: @color-on-primary;
+@button-padding: 1em;
+
+// sections
+@section-full-bg-color: #fff;
+
+*{margin: 0;padding: 0;box-sizing: border-box; -webkit-tap-highlight-color: transparent;}
+ul{list-style: none;}
+a{text-decoration: none; color: #fff;}
+
+html,
+body{
+	height: 100%;
+	overflow: hidden;
+}
+
+body{
+	font-size: 100%;
+	font-family: Segoe UI;
+	color: @font-color;
+	background-color: @background-color;	
+}
+
+a{
+	color: #41a871;
+	font-weight: bold;
+}
+
+input{
+	display: block;
+	font-size: 1em;
+	width: 100%;
+	border: 1px solid @input-border-color;
+	padding: @form-padding;
+	margin-bottom: @form-margin;
+}
+
+label{
+    color: @label-color;
+}
+
+input:focus{
+	border: 1px solid @primary-color;
+	outline: none;
+}
+
+ input::-webkit-input-placeholder{
+ 	color: @placeholder-color;
+ }
+
+ button{
+ 	background-color: @button-background-color;
+ 	border: none;
+ 	color: @button-color;
+ 	padding: @button-padding;
+ 	min-width: 40%;
+ 	float: right;
+ }
+
+ button.full{
+     width: 100%;
+     float: none;
+ }
+
+* img{
+	display: block;
+	max-width: 100%;
+}
+
+.clearfix:after{
+	display: block;
+	content: " ";
+	clear: both;
+}
+
+
+// Navigation -----------------------------------------
+div.nav{
+	background-color: #262626;	
+	box-shadow: 0px 1px 1px 1px #000;
+	position: relative;
+	z-index: 999;
+}
+
+h1{
+	color: #fff;
+	font-size: 2em;
+	text-shadow: 1px 1px #d1d1d1;
+	line-height: 1em;
+}
+
+h2{
+	font-size: 1.1em;
+	font-weight: normal;
+	padding-left: 0.1em;
+}
+
+div.nav ul{
+	
+}
+
+div.nav ul:after{
+	content: " ";
+	clear: both;
+	display: block;
+}
+
+div.nav ul li{
+	float: left;
+	width: 25%;	
+	border-left: 1px solid #212223;
+}
+
+div.nav ul li:first-child{
+	border-left: none;
+}
+
+div.nav ul li a{
+	background-color: #282a29;
+	display: block;	
+	text-align: center;
+	padding: 1em;
+	font-size: 0.8em;
+	font-weight: bold;
+	color: #606261;
+	-webkit-text-stroke: 1px rgba(0,0,0,0.1);
+}
+
+div.nav ul li a.active{
+	background-color: #212223;
+	color: #fff;
+}
+
+// Sections -------------------------------------------------
+
+div.section{
+	margin: 1em;
+	margin-bottom: 0;
+}
+
+div.section.full{
+	margin: 0 0 1px 0;
+	padding: 1em;
+	background-color: @section-full-bg-color;
+}
+
+div.section.full h2{
+	color: #333;
+	font-weight: bold;
+}
+
+div.section.intro{
+	background-color: @primary-color;
+	color: @color-on-primary;	
+}
+
+div.section.intro span{
+	display: block;
+}
+
+div.section.intro div.course-info{
+	float: left;	
+}
+
+div.section.intro div.status{
+	float: right;
+	font-size: 1.2em;	
+}
+
+div.section.intro div.status span.hole{
+	border-bottom: 1px solid #fff;
+	font-size: 1.2em;
+}
+
+div.section.filled span{
+	font-size: 1.5em;
+	color: #c1c1c1;
+}
+
+div.section.grid-3 > *{
+	display: block;
+	width: 33.3333%;
+	float: left;
+}
+
+div.section.center{
+	text-align: center;
+}
+
+div.section.last{
+	position: absolute;
+	bottom: 1em;
+}
+
+div.start-img{
+	width: 30%;
+	margin: 0 auto;
+	margin-top: 2em;
+}
+
+// Form -------------------------------------------------
+label.radio{
+    display: block;
+}
+
+input[type="radio"]{
+    display: inline;
+    width: auto;
+    margin-left: 0.5em;
+}
+
+/*Specifics*/
+span.course{
+	font-size: 1.4em;
+}
+
+span.club{
+	font-size: 1em;
+	font-weight: bold;
+}

@@ -57,12 +57,27 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\style.css" />
+    <Content Include="css\style.min.css">
+      <DependentUpon>style.less</DependentUpon>
+    </Content>
+    <Content Include="img\golf.png" />
+    <Content Include="Index.html" />
+    <Content Include="js\fastclick\fastclick.js" />
+    <Content Include="js\GEO.js" />
+    <Content Include="js\knockout\knockout-2.3.0.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\polyfill.js" />
+    <Content Include="js\touch.js" />
+    <Content Include="login.html" />
+    <None Include="mock\Courses.json" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\style.less" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -70,6 +85,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

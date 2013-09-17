@@ -1,0 +1,113 @@
+﻿<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Untitled</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="author" href="humans.txt">
+    </head>
+    <body>
+        
+    	<div class="nav">
+    		<ul>
+	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'home' }, click: function () { contentView.viewName('home') }">Home</a></li>
+	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'settings' }, click: function () { contentView.viewName('settings') }">Settings</a></li>
+	    	    <li><a href="#" data-bind="css: { active: ['round', 'round-select-club'].indexOf(contentView.viewName()) > -1 }, click: function () { contentView.viewName('round') }">Round</a></li>
+	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'stats' }, click: function () { contentView.viewName('stats') }">Stats</a></li>
+    	    </ul>
+    	</div>
+
+        <div class="content" data-bind="template: { name: function () { return contentView.viewName() }, data: $root }">
+
+        </div>
+
+        <!-- Content view: Home -->
+        <script type="text/html" id="home">
+            <div class="section full intro clearfix">
+                <span><b data-bind="text: account.name"></b></span>
+                <span data-bind="text: 'Handicap ' + account.handicap()"></span>
+        	</div>
+
+            <div class="section full">
+                <h2>Latest rounds</h2>
+            </div>
+
+            <div class="section full">
+                <p><b>2013-03-31</b></p>
+                <p>Vallda Golf & Country Club</p>
+                <p>18-Hålsbanan</p>
+            </div>
+            <div class="section full">
+                <p><b>2013-03-31</b></p>
+                <p>Öijared Golfklubb</p>
+                <p>Gamla banan</p>
+            </div>
+            <div class="section full">
+                <p><b>2013-03-31</b></p>
+                <p>Albatross Golfklubb</p>
+                <p>1-18</p>
+            </div>
+        </script>
+
+        <script type="text/html" id="settings">
+        
+            <div class="section">
+                <h1>Settings</h1>
+                <h2>Please fill in you personal settings</h2>
+            </div>
+
+            <div class="section clearfix">
+                <label>Name</label>
+                <input type="text" data-bind="value: account.name">
+                <label>Handicap</label>
+                <input type="text" data-bind="value: account.handicap">
+                <label>Gender</label>
+                <label class="radio">
+                    <input type="radio" value="1" name="gender" data-bind="checked: account.gender" />
+                    Male
+                </label>
+                <label class="radio">
+                    <input type="radio" value="0" name="gender" data-bind="checked: account.gender"/>
+                    Female
+                </label>                
+                
+            </div>
+            
+        </script>
+
+        <script type="text/html" id="round">
+            <div class="section">
+                <h1>Round</h1>
+                <h2>Good luck with your round!</h2>
+            </div>
+
+            <div class="section">
+                <button class="full" data-bind="text: round.started() ? 'Round in Progress. Press to continue' : 'Press to start new round', click: round.start"></button>
+            </div>
+        </script>
+
+        <script type="text/html" id="round-select-club">
+            <div class="section">
+                <h1>Round - Club</h1>
+                <h2>Please select the club you want't to play</h2>
+            </div>
+
+            <div class="section">
+                
+            </div>
+        </script>
+
+        <script type="text/html" id="stats">
+            <h1>Stats</h1>
+        </script>
+
+        <script src="js/fastclick/fastclick.js"></script>
+        <script src="js/knockout/knockout-2.3.0.js"></script>
+        <script src="js/polyfill.js"></script>
+        <script src="js/GEO.js"></script>
+        <script src="js/touch.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>

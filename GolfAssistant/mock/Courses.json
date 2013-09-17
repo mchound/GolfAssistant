@@ -1,0 +1,16 @@
+﻿[
+    {
+        "GUID": "a2819245-6392-4496-af36-cfb94a376859",
+        "RegionGUID": "6a24ca2d-997d-4ee4-bd61-ce27ed2c0866",
+        "Name": "A6 Golfklubb",
+        "Lat": 57.7622718,
+        "Lon": 14.2134960
+    },
+    {
+        "GUID": "c440f406-3433-4e16-b0c2-23478f606640",
+        "RegionGUID": "534d22b7-4904-472a-b5db-e7da7e8f41ba",
+        "Name": "Öijared Golfklubb",
+        "Lat": 57.85668198261536,
+        "Lon": 12.396648919262677
+    }
+]
