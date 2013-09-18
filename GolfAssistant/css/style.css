@@ -213,14 +213,21 @@ div.browse-clubs {
 }
 div.browse-clubs div.search-wrapper {
   margin: 0 1em;
+  position: relative;
+}
+div.browse-clubs div.search-wrapper:after {
+  color: #d7e1e2;
+  font-size: 1.2em;
+  top: 0.4em;
 }
 div.browse-clubs div.search-wrapper input {
   border-top: none;
   border-left: none;
   border-right: none;
+  padding-left: 1.5em;
 }
 [class*='icon-']:after {
-  font-family: 'icomoon';
+  font-family: icomoon;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -228,10 +235,8 @@ div.browse-clubs div.search-wrapper input {
   text-transform: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
+  position: absolute;
 }
 .icon-search:after {
-  /*content: "\e080";*/
-
-  content: "HEJ P� DIG";
-  color: red;
+  content: "\e080";
 }

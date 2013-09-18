@@ -30,6 +30,20 @@ function viewModel() {
 	        hasher.gotoHash(hash);
 	    }
 	}
+
+	this.store = {
+	    courses: ko.observableArray([]),
+	    clubSearchQuery: ko.observable('')	    
+	},
+
+    this.search = {
+        filteredCourses: ko.computed(function () {
+            var searchQuery = self.store.clubSearchQuery();
+            return ko.utils.arrayFilter(this.courses(), function (course) {
+                return course.Name.toLowerCase().indexOf(searchQuery) != -1;
+            });
+        }, self.store)
+    }
 }
  
  var vm = new viewModel();
@@ -43,8 +57,8 @@ var courses;
 var geo = new GEO();
 
 ajax('mock/Courses.json', function (data) {
-    courses = JSON.parse(data);
-    console.log(geo.distance(57.779614, 14.164979, courses[1].Lat, courses[1].Lon));
+    vm.store.courses(JSON.parse(data));
+    //console.log(geo.distance(57.779614, 14.164979, courses[1].Lat, courses[1].Lon));
 });
 
 hasher.hashchange(function (hashData) {

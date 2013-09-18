@@ -123,12 +123,11 @@
                 </script>
                 <script type="text/html" id="browse-clubs">
                     <div class="browse-clubs">
-                        <div class="search-wrapper"><input type="text" placeholder="Type a club name to find it" class="icon-search" /></div>
-                        <ul>
-                            <li>Hitta</li>
-                            <li>Din</li>
-                            <li>Klubb</li>
-                            <li>Själv</li>                        
+                        <div class="search-wrapper icon-search">
+                            <input type="text" placeholder="Type a club name to find it" data-bind="value: store.clubSearchQuery, valueUpdate: 'afterkeydown'"/>
+                        </div>
+                        <ul data-bind="foreach: search.filteredCourses">
+                            <li data-bind="text: Name"></li>
                         </ul>
                     </div>
                 </script>
