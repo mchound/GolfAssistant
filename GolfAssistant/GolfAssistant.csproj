@@ -61,15 +61,22 @@
     <Content Include="css\style.min.css">
       <DependentUpon>style.less</DependentUpon>
     </Content>
+    <Content Include="fonts\icomoon\fonts\icomoon.dev.svg" />
+    <Content Include="fonts\icomoon\fonts\icomoon.svg" />
+    <Content Include="fonts\icomoon\style.css" />
     <Content Include="img\golf.png" />
     <Content Include="Index.html" />
     <Content Include="js\fastclick\fastclick.js" />
     <Content Include="js\GEO.js" />
+    <Content Include="js\hasher.js" />
     <Content Include="js\knockout\knockout-2.3.0.js" />
     <Content Include="js\main.js" />
     <Content Include="js\polyfill.js" />
     <Content Include="js\touch.js" />
     <Content Include="login.html" />
+    <Content Include="fonts\icomoon\fonts\icomoon.eot" />
+    <Content Include="fonts\icomoon\fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon\fonts\icomoon.woff" />
     <None Include="mock\Courses.json" />
     <Content Include="Web.config" />
   </ItemGroup>

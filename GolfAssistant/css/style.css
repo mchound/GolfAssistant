@@ -1,4 +1,11 @@
-﻿* {
+﻿@font-face {
+  font-family: 'icomoon';
+  src: url('../fonts/icomoon/fonts/icomoon.eot');
+  src: url('../fonts/icomoon/fonts/icomoon.eot?#iefix') format('embedded-opentype'), url('../fonts/icomoon/fonts/icomoon.woff') format('woff'), url('../fonts/icomoon/fonts/icomoon.ttf') format('truetype'), url('../fonts/icomoon/fonts/icomoon.svg#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -80,7 +87,6 @@ h1 {
 h2 {
   font-size: 1.1em;
   font-weight: normal;
-  padding-left: 0.1em;
 }
 div.nav ul:after {
   content: " ";
@@ -169,6 +175,31 @@ input[type="radio"] {
   width: auto;
   margin-left: 0.5em;
 }
+ul.tabs:after {
+  clear: both;
+  display: block;
+  content: " ";
+}
+ul.tabs li {
+  float: left;
+  width: 33.33333%;
+  text-align: center;
+  background-color: #d6dcde;
+  padding: 0.5em;
+  color: #9eacb0;
+  cursor: pointer;
+}
+ul.tabs li.active {
+  background-color: #fff;
+  color: #333;
+}
+div.tab-content {
+  background-color: #fff;
+  color: #333;
+}
+div.tab-content ul li {
+  padding: 0.5em 1em;
+}
 /*Specifics*/
 span.course {
   font-size: 1.4em;
@@ -176,4 +207,31 @@ span.course {
 span.club {
   font-size: 1em;
   font-weight: bold;
+}
+div.browse-clubs {
+  padding-top: 0.3em;
+}
+div.browse-clubs div.search-wrapper {
+  margin: 0 1em;
+}
+div.browse-clubs div.search-wrapper input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+[class*='icon-']:after {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-search:after {
+  /*content: "\e080";*/
+
+  content: "HEJ P� DIG";
+  color: red;
 }

@@ -5,6 +5,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Untitled</title>
+
+        <!--<link href="fonts/icomoon/style.css" rel="stylesheet" />-->
         <link rel="stylesheet" href="css/style.css">
         <link rel="author" href="humans.txt">
     </head>
@@ -12,14 +14,14 @@
         
     	<div class="nav">
     		<ul>
-	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'home' }, click: function () { contentView.viewName('home') }">Home</a></li>
-	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'settings' }, click: function () { contentView.viewName('settings') }">Settings</a></li>
-	    	    <li><a href="#" data-bind="css: { active: ['round', 'round-select-club'].indexOf(contentView.viewName()) > -1 }, click: function () { contentView.viewName('round') }">Round</a></li>
-	    	    <li><a href="#" data-bind="css: { active: contentView.viewName() == 'stats' }, click: function () { contentView.viewName('stats') }">Stats</a></li>
+	    	    <li><a href="#home" data-bind="css: { active: views.contentView() == 'home' }">Home</a></li>
+	    	    <li><a href="#settings" data-bind="css: { active: views.contentView() == 'settings' }">Settings</a></li>
+	    	    <li><a href="#round" data-bind="css: { active: ['round', 'round-select-club'].indexOf(views.contentView()) > -1 }">Round</a></li>
+	    	    <li><a href="#stats" data-bind="css: { active: views.contentView() == 'stats' }">Stats</a></li>
     	    </ul>
     	</div>
 
-        <div class="content" data-bind="template: { name: function () { return contentView.viewName() }, data: $root }">
+        <div class="content" data-bind="template: { name: function () { return views.contentView() }, data: $root }">
 
         </div>
 
@@ -84,7 +86,7 @@
             </div>
 
             <div class="section">
-                <button class="full" data-bind="text: round.started() ? 'Round in Progress. Press to continue' : 'Press to start new round', click: round.start"></button>
+                <button class="full" data-bind="text: round.started() ? 'Round in Progress. Press to continue' : 'Press to start new round', click: round.start"></button>                
             </div>
         </script>
 
@@ -95,7 +97,41 @@
             </div>
 
             <div class="section">
-                
+                <ul class="tabs">
+                    <li data-bind="click: function () { views.clubTabView('nearest-clubs'); }, css: { active: views.clubTabView() == 'nearest-clubs' }">Nearest</li>
+                    <li data-bind="click: function () { views.clubTabView('recent-clubs'); }, css: { active: views.clubTabView() == 'recent-clubs' }">Recent</li>
+                    <li data-bind="    click: function () { views.clubTabView('browse-clubs'); }, css: { active: views.clubTabView() == 'browse-clubs' }">Browse</li>
+                </ul>
+                <div class="tab-content" data-bind="template: { name: function () { return views.clubTabView() }, data: $root }"></div>
+                <script type="text/html" id="nearest-clubs">
+                    <ul>
+                        <li>Detta</li>
+                        <li>Är</li>
+                        <li>Dom</li>
+                        <li>Närmsta</li>
+                        <li>Klubbarna</li>
+                    </ul>
+                </script>
+                <script type="text/html" id="recent-clubs">
+                    <ul>
+                        <li>Detta</li>
+                        <li>Är</li>
+                        <li>Dom</li>
+                        <li>Senaste</li>
+                        <li>Klubbarna</li>
+                    </ul>
+                </script>
+                <script type="text/html" id="browse-clubs">
+                    <div class="browse-clubs">
+                        <div class="search-wrapper"><input type="text" placeholder="Type a club name to find it" class="icon-search" /></div>
+                        <ul>
+                            <li>Hitta</li>
+                            <li>Din</li>
+                            <li>Klubb</li>
+                            <li>Själv</li>                        
+                        </ul>
+                    </div>
+                </script>
             </div>
         </script>
 
@@ -107,6 +143,7 @@
         <script src="js/knockout/knockout-2.3.0.js"></script>
         <script src="js/polyfill.js"></script>
         <script src="js/GEO.js"></script>
+        <script src="js/hasher.js"></script>
         <script src="js/touch.js"></script>
         <script src="js/main.js"></script>
     </body>
