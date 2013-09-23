@@ -3,7 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <title>Untitled</title>
 
         <!--<link href="fonts/icomoon/style.css" rel="stylesheet" />-->
@@ -16,7 +18,9 @@
     		<ul>
 	    	    <li><a href="#home" data-bind="css: { active: views.contentView() == 'home' }">Home</a></li>
 	    	    <li><a href="#settings" data-bind="css: { active: views.contentView() == 'settings' }">Settings</a></li>
-	    	    <li><a href="#round" data-bind="css: { active: ['round', 'round-select-club'].indexOf(views.contentView()) > -1 }">Round</a></li>
+	    	    <li><a href="#round" 
+data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 'round-select-tee'].indexOf(views.contentView()) > -1 }">
+                    Round</a></li>
 	    	    <li><a href="#stats" data-bind="css: { active: views.contentView() == 'stats' }">Stats</a></li>
     	    </ul>
     	</div>
@@ -104,16 +108,14 @@
                 </ul>
                 <div class="tab-content" data-bind="template: { name: function () { return views.clubTabView() }, data: $root }"></div>
                 <script type="text/html" id="nearest-clubs">
-                    <ul>
-                        <li>Detta</li>
-                        <li>Är</li>
-                        <li>Dom</li>
-                        <li>Närmsta</li>
-                        <li>Klubbarna</li>
+                    <ul class="selectable-list filled with-lines" data-bind="foreach: search.nearest">
+                        <li data-bind="click: $root.round.clubSelect">
+                            <span data-bind="text: Name"></span><span class="r" data-bind="text: distance + 'km'"></span>
+                        </li>
                     </ul>
                 </script>
                 <script type="text/html" id="recent-clubs">
-                    <ul>
+                    <ul class="selectable-list filled">
                         <li>Detta</li>
                         <li>Är</li>
                         <li>Dom</li>
@@ -126,11 +128,37 @@
                         <div class="search-wrapper icon-search">
                             <input type="text" placeholder="Type a club name to find it" data-bind="value: store.clubSearchQuery, valueUpdate: 'afterkeydown'"/>
                         </div>
-                        <ul data-bind="foreach: search.filteredCourses">
+                        <ul class="selectable-list filled" data-bind="foreach: search.filteredClubs">
                             <li data-bind="text: Name"></li>
                         </ul>
                     </div>
                 </script>
+            </div>
+        </script>
+
+        <script type="text/html" id="round-select-course">
+            <div class="section">
+                <h1>Round - Course</h1>
+                <h2>Please select the course you want't to play</h2>
+            </div>
+            <div class="section">
+                <ul class="selectable-list filled with-lines" data-bind="foreach: round.club().Data.Courses">
+                    <li data-bind="click: $root.round.courseSelect">
+                        <span data-bind="text: Name"></span><span data-bind="text: NumberOfHoles + ' holes'" class="r"></span>
+                    </li>
+                </ul>                
+            </div>
+        </script>
+
+        <script type="text/html" id="round-select-tee">
+            <div class="section">
+                <h1>Round - Tee</h1>
+                <h2>Please select the tee you want't to play</h2>
+            </div>
+            <div class="section">
+                <ul class="selectable-list filled with-lines" data-bind="foreach: search.tees">
+                    <li><span data-bind="text: TeeColor"></span><span data-bind="text: strokes + ' strokes'" class="r"></span></li>
+                </ul>                
             </div>
         </script>
 
@@ -143,7 +171,7 @@
         <script src="js/polyfill.js"></script>
         <script src="js/GEO.js"></script>
         <script src="js/hasher.js"></script>
-        <script src="js/touch.js"></script>
+        <!--<script src="js/touch.js"></script>-->
         <script src="js/main.js"></script>
     </body>
 </html>

@@ -37,8 +37,7 @@ a{text-decoration: none; color: #fff;}
 
 html,
 body{
-	height: 100%;
-	overflow: hidden;    
+	 padding: 20px 0;
 }
 
 body{
@@ -46,6 +45,7 @@ body{
 	font-family: Segoe UI;
 	color: @font-color;
 	background-color: @background-color;	
+    height: auto;    
 }
 
 a{
@@ -100,12 +100,18 @@ input:focus{
 	clear: both;
 }
 
+.r{
+    float: right;
+}
 
 // Navigation -----------------------------------------
 div.nav{
 	background-color: #262626;	
 	box-shadow: 0px 1px 1px 1px #000;
-	position: relative;
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
 	z-index: 999;
 }
 
@@ -247,7 +253,7 @@ ul.tabs li{
     width: 33.33333%;
     text-align: center;
     background-color: darken(@background-color, 5%);
-    padding: 0.5em;
+    padding: 1em;
     color: darken(@background-color, 25%);
     cursor: pointer;  
 }
@@ -262,8 +268,27 @@ div.tab-content{
     color: #333;
 }
 
-div.tab-content ul li{
-    padding: 0.5em 1em;
+ul.selectable-list.filled{
+    color: #333;
+    background-color: #fff;
+}
+
+ul.selectable-list.with-lines{
+    border-top: 1px solid lighten(@background-color, 5%);
+}
+
+ul.selectable-list.with-lines li{
+    border-bottom: 1px solid lighten(@background-color, 5%);
+}
+
+ul.selectable-list li{
+    padding: 1em 1em;
+    cursor: pointer;
+}
+
+ul.selectable-list li:hover{
+    background-color: @button-background-color;
+    color: #fff;
 }
 
 /*Specifics*/

@@ -20,14 +20,14 @@ a {
 }
 html,
 body {
-  height: 100%;
-  overflow: hidden;
+  padding: 20px 0;
 }
 body {
   font-size: 100%;
   font-family: Segoe UI;
   color: #51b881;
   background-color: #e4e8e9;
+  height: auto;
 }
 a {
   color: #41a871;
@@ -72,10 +72,16 @@ button.full {
   content: " ";
   clear: both;
 }
+.r {
+  float: right;
+}
 div.nav {
   background-color: #262626;
   box-shadow: 0px 1px 1px 1px #000;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   z-index: 999;
 }
 h1 {
@@ -185,7 +191,7 @@ ul.tabs li {
   width: 33.33333%;
   text-align: center;
   background-color: #d6dcde;
-  padding: 0.5em;
+  padding: 1em;
   color: #9eacb0;
   cursor: pointer;
 }
@@ -197,8 +203,23 @@ div.tab-content {
   background-color: #fff;
   color: #333;
 }
-div.tab-content ul li {
-  padding: 0.5em 1em;
+ul.selectable-list.filled {
+  color: #333;
+  background-color: #fff;
+}
+ul.selectable-list.with-lines {
+  border-top: 1px solid #f2f4f4;
+}
+ul.selectable-list.with-lines li {
+  border-bottom: 1px solid #f2f4f4;
+}
+ul.selectable-list li {
+  padding: 1em 1em;
+  cursor: pointer;
+}
+ul.selectable-list li:hover {
+  background-color: #51b881;
+  color: #fff;
 }
 /*Specifics*/
 span.course {
