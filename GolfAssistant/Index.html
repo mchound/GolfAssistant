@@ -19,7 +19,7 @@
 	    	    <li><a href="#home" data-bind="css: { active: views.contentView() == 'home' }">Home</a></li>
 	    	    <li><a href="#settings" data-bind="css: { active: views.contentView() == 'settings' }">Settings</a></li>
 	    	    <li><a href="#round" 
-data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 'round-select-tee'].indexOf(views.contentView()) > -1 }">
+data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 'round-select-tee', 'round-play'].indexOf(views.contentView()) > -1 }">
                     Round</a></li>
 	    	    <li><a href="#stats" data-bind="css: { active: views.contentView() == 'stats' }">Stats</a></li>
     	    </ul>
@@ -32,7 +32,7 @@ data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 
         <!-- Content view: Home -->
         <script type="text/html" id="home">
             <div class="section full intro clearfix">
-                <span><b data-bind="text: account.name"></b></span>
+                <span class="d-block"><b data-bind="text: account.name"></b></span>
                 <span data-bind="text: 'Handicap ' + account.handicap()"></span>
         	</div>
 
@@ -125,11 +125,11 @@ data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 
                 </script>
                 <script type="text/html" id="browse-clubs">
                     <div class="browse-clubs">
-                        <div class="search-wrapper icon-search">
+                        <div class="input-wrapper icon-search">
                             <input type="text" placeholder="Type a club name to find it" data-bind="value: store.clubSearchQuery, valueUpdate: 'afterkeydown'"/>
                         </div>
                         <ul class="selectable-list filled" data-bind="foreach: search.filteredClubs">
-                            <li data-bind="text: Name"></li>
+                            <li data-bind="text: Name, click: $root.round.clubSelect"></li>
                         </ul>
                     </div>
                 </script>
@@ -157,9 +157,67 @@ data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 
             </div>
             <div class="section">
                 <ul class="selectable-list filled with-lines" data-bind="foreach: search.tees">
-                    <li><span data-bind="text: TeeColor"></span><span data-bind="text: strokes + ' strokes'" class="r"></span></li>
+                    <li data-bind="click: $root.round.teeSelect">
+                        <span data-bind="text: TeeColor"></span><span data-bind="text: strokes + ' strokes'" class="r"></span>
+                    </li>
                 </ul>                
             </div>
+        </script>
+
+        <script type="text/html" id="round-play">
+            <div class="section full intro clearfix">
+                <h1 data-bind="text: round.holeNr" class="inline"></h1>
+                <div class="r">
+                    <span class="d-block" data-bind="text: 'Index ' + ongoingRound.hole().Index"></span>
+                    <span class="d-block" data-bind="text: 'Par ' + ongoingRound.hole().Par"></span>
+                    <span class="d-block" data-bind="text: ongoingRound.length() + ' m'"></span>
+                </div>
+            </div>
+
+            <div class="section full">
+                <div class="score-input-wrapper icon-table-2">
+                    <input type="text" placeholder="Score" class="score" data-scroll-on-focus="true" data-bind="value: ongoingRound.strokes[round.holeNr() - 1], event: {change: ongoingRound.scoreChanged}"/>
+                </div>
+            </div>
+
+            <div class="section full">
+                <span class="distance">FRONT</span>
+                <span class="distance r">65 m</span>
+            </div>
+            <div class="section full">
+                <span class="distance">CENTER</span>
+                <span class="distance r">81 m</span>
+            </div>
+            <div class="section full">
+                <span class="distance">BACK</span>
+                <span class="distance r">90 m</span>
+            </div>            
+
+            <div class="round-buttons">
+                <button data-bind="click: round.prevHole"></button>
+                <button data-bind="click: round.nextHole"></button>
+            </div>
+
+            <div class="section full">
+                <h2 data-bind="click: function () { ongoingRound.showScorecard(!ongoingRound.showScorecard()) }">Show scorecard</h2>
+                <div class="slide" data-bind="css: {active: ongoingRound.showScorecard}">
+                    <table class="scorecard">
+                        <thead><tr><td>Nr</td><td>Hcp</td><td>Par</td><td>Len</td><td>Str</td><td>Pt</td><td>Res</td></tr></thead>
+                        <tbody data-bind="foreach: ongoingRound.scorecard">
+                               <tr>
+                                   <td data-bind="text: nr"></td>
+                                   <td data-bind="text: index"></td>
+                                   <td data-bind="text: par"></td>
+                                   <td data-bind="text: length"></td>
+                                   <td data-bind="text: strokes"></td>
+                                   <td data-bind="text: points"></td>
+                                   <td data-bind="text: result"></td>
+                               </tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </script>
 
         <script type="text/html" id="stats">
@@ -168,6 +226,7 @@ data-bind="css: { active: ['round', 'round-select-club', 'round-select-course', 
 
         <script src="js/fastclick/fastclick.js"></script>
         <script src="js/knockout/knockout-2.3.0.js"></script>
+        <script src="js/ko.extend.js"></script>
         <script src="js/polyfill.js"></script>
         <script src="js/GEO.js"></script>
         <script src="js/hasher.js"></script>

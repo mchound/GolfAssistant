@@ -21,6 +21,9 @@ function viewModel() {
         started: ko.observable(false),
         club: ko.observable({ Data: { Courses: [] }}),
         course: ko.observable({}),
+        tee: ko.observable({}),
+        strokes: ko.observable(0),
+        holeNr: ko.observable(0),        
         start: function () {
             self.round.started(true);
             hasher.gotoHash('round-select-club');
@@ -31,8 +34,89 @@ function viewModel() {
         },
         courseSelect: function (course) {
             self.round.course(course);
+            var holes = course.Loop.Holes;
+            for (var i = 0; i < holes.length; i++) {
+                self.ongoingRound.strokes.push(ko.observable());
+            };
             hasher.gotoHash('round-select-tee');
+        },
+        teeSelect: function (tee) {
+            self.round.tee(tee);
+            self.round.holeNr(1);
+            self.round.strokes(self.commonFn.strokes(tee, self.round.course().Par))
+            hasher.gotoHash('round-play');
+        },
+        nextHole: function () {
+            window.scroll(0, 0);
+            var holeNr = self.round.holeNr();
+            if (++holeNr > self.round.course().Loop.Holes.length)
+                self.round.holeNr(1);
+            else
+                self.round.holeNr(holeNr);
+        },
+        prevHole: function () {
+            window.scroll(0, 0);
+            var holeNr = self.round.holeNr();
+            if (--holeNr < 1)
+                self.round.holeNr(self.round.course().Loop.Holes.length);
+            else
+                self.round.holeNr(holeNr);
         }
+    };
+
+    this.ongoingRound = {
+        scoreCahnged: function(val){
+            var v = 1;
+        },
+        strokes: [],        
+        hole: ko.computed(function () {
+            var holeNr = this.holeNr();
+            if (holeNr == 0) return {};
+            return this.course().Loop.Holes[holeNr - 1];
+        }, self.round),
+        length: ko.computed(function () {
+            var holeNr = this.holeNr();
+            if (holeNr == 0) return -1;
+            var tee = this.tee();
+            var tees = this.course().Loop.Holes[holeNr - 1].Tees;
+            for (var i = 0; i < tees.length; i++) {
+                if (tees[i].Color == tee.TeeColor)
+                    return tees[i].Length;
+            }
+        }, self.round),
+        showScorecard: ko.observable(false),
+        scorecard: ko.computed(function () {
+            var hole = self.round.holeNr();
+            var course = self.round.course();
+            var tee = self.round.tee();
+            if (!course.Loop) return {};
+            var holes = course.Loop.Holes;
+            var strokes = self.ongoingRound.strokes;
+            if (strokes.length <= 0) return {};
+            var scorecard = [];
+            var res = 0;
+            for (var i = 0; i < holes.length; i++) {
+                var
+                index = holes[i].Index,
+                par = holes[i].Par,
+                length = self.commonFn.lengthByHole(i) + 'm',
+                strokeBenefit = self.commonFn.strokeBenefit(holes[i].Index, self.round.strokes(), holes[i].Par, holes.length),
+                strokesOnHole = strokes[i](),
+                points = strokesOnHole ? par + strokeBenefit + 2 - strokesOnHole : '-';
+                res += strokesOnHole ? points : 0;
+                scorecard.push({
+                    nr: i + 1,
+                    index: index,
+                    par: par,
+                    length: length,
+                    strokeBenefit: strokeBenefit,
+                    points: points,
+                    strokes: strokesOnHole || '-',
+                    result: strokesOnHole ? res : ''
+                });
+            };
+            return scorecard;
+        })
     };
 
     this.commonFn = {
@@ -45,6 +129,25 @@ function viewModel() {
             hcp = self.account.handicap();
 
             return Math.floor(hcp * (tee.SlopeValue / 113) + (tee.CourseRating - par));
+        },
+
+        lengthByHole: function(zeroBasedholeNr){
+            var
+            tees = self.round.course().Loop.Holes[zeroBasedholeNr].Tees,
+            tee = self.round.tee();
+
+            for (var i = 0; i < tees.length; i++) {
+                if (tees[i].Color == tee.TeeColor)
+                    return tees[i].Length;
+            }
+        },
+
+        strokeBenefit: function (index, hcpStrokes, holePar, holeCount) {
+            var
+            base = parseInt(hcpStrokes / holeCount),
+            add = hcpStrokes % holeCount,
+            strokeBenefit = base + (index <= add ? 1 : 0);
+            return strokeBenefit;
         }
     };
 
@@ -95,7 +198,7 @@ function viewModel() {
     };
 
     this.views.contentView.subscribe(function (newValue) {
-        if (['round-select-club', 'round-select-course', 'round-select-tee'].indexOf(newValue) !== -1 && !self.round.started())
+        if (['round-select-club', 'round-select-course', 'round-select-tee', 'round-play'].indexOf(newValue) !== -1 && !self.round.started())
             hasher.gotoHash('round');
         
         if (['round-select-club', 'round-select-course'].indexOf(newValue) !== -1 && self.round.started())
@@ -103,7 +206,6 @@ function viewModel() {
         else
             geo.stop();
     });
-
 };
  
 var mainViews = ['home', 'settings', 'round', 'stats'];

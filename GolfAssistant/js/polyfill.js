@@ -14,3 +14,22 @@ function ajax(url, callback) {
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
+
+//var start = new Date().getTime();
+//var interval = setInterval(function () {
+//    var elements = document.querySelectorAll('[data-scroll-on-focus]');
+//    if (elements.length > 0)
+//        bindScrollers(elements);
+//    else if (new Date().getTime() - start > 10000)
+//        clearInterval(interval);
+//}, 200);
+
+//function bindScrollers(elements) {
+//    for (var i = 0; i < elements.length; i++) {
+//        (function(index){
+//            elements[index].addEventListener('focus', function () {
+//                setTimeout(function () { window.scrollTo(0, 1000); }, 1000);
+//            });
+//        })(i);
+//    };
+//};

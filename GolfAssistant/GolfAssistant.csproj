@@ -78,6 +78,7 @@
     <Content Include="fonts\icomoon\fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon\fonts\icomoon.woff" />
     <Content Include="mock\_Courses.json" />
+    <Content Include="js\ko.extend.js" />
     <None Include="mock\Courses.json" />
     <Content Include="Web.config" />
   </ItemGroup>

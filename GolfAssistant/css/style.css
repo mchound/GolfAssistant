@@ -20,11 +20,11 @@ a {
 }
 html,
 body {
-  padding: 20px 0;
+  padding: 20px 0 40px 0;
 }
 body {
   font-size: 100%;
-  font-family: Segoe UI;
+  font-family: sans-serif;
   color: #51b881;
   background-color: #e4e8e9;
   height: auto;
@@ -40,6 +40,7 @@ input {
   border: 1px solid #d7e1e2;
   padding: 0.6em;
   margin-bottom: 0.5em;
+  color: #444;
 }
 label {
   color: #9cb5b7;
@@ -50,6 +51,26 @@ input:focus {
 }
 input::-webkit-input-placeholder {
   color: #d7e1e2;
+}
+div.score-input-wrapper {
+  margin: 0 1em;
+  position: relative;
+}
+div.score-input-wrapper:after {
+  color: #d7e1e2;
+  font-size: 2em;
+  top: 0.3em;
+}
+div.score-input-wrapper input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  padding: 0.3em;
+  padding-left: 1.5em;
+  font-size: 2em;
+  width: 5em;
+  color: #aaa;
+  text-align: center;
 }
 button {
   background-color: #51b881;
@@ -74,6 +95,18 @@ button.full {
 }
 .r {
   float: right;
+}
+.l {
+  float: left;
+}
+.inline {
+  display: inline;
+}
+.d-block {
+  display: block;
+}
+.c-3 {
+  width: 33.3333%;
 }
 div.nav {
   background-color: #262626;
@@ -124,11 +157,13 @@ div.nav ul li a.active {
 div.section {
   margin: 1em;
   margin-bottom: 0;
+  position: relative;
 }
 div.section.full {
   margin: 0 0 1px 0;
   padding: 1em;
   background-color: #ffffff;
+  color: #333;
 }
 div.section.full h2 {
   color: #333;
@@ -137,9 +172,6 @@ div.section.full h2 {
 div.section.intro {
   background-color: #51b881;
   color: #ffffff;
-}
-div.section.intro span {
-  display: block;
 }
 div.section.intro div.course-info {
   float: left;
@@ -172,6 +204,26 @@ div.start-img {
   width: 30%;
   margin: 0 auto;
   margin-top: 2em;
+}
+span.distance {
+  color: #bbb;
+  font-size: 1.3em;
+}
+table.scorecard {
+  width: 100%;
+  border-spacing: 0;
+}
+table.scorecard thead tr td {
+  border-bottom: 1px solid #aaa;
+}
+table.scorecard tbody tr td {
+  padding: 0.4em 0;
+}
+table.scorecard tbody tr:nth-child(even) td {
+  background-color: #e4e8e9;
+}
+table.scorecard td {
+  text-align: center;
 }
 label.radio {
   display: block;
@@ -232,20 +284,55 @@ span.club {
 div.browse-clubs {
   padding-top: 0.3em;
 }
-div.browse-clubs div.search-wrapper {
+div.input-wrapper {
   margin: 0 1em;
   position: relative;
 }
-div.browse-clubs div.search-wrapper:after {
+div.input-wrapper:after {
   color: #d7e1e2;
   font-size: 1.2em;
   top: 0.4em;
 }
-div.browse-clubs div.search-wrapper input {
+div.input-wrapper input {
   border-top: none;
   border-left: none;
   border-right: none;
   padding-left: 1.5em;
+}
+div.round-buttons {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+div.round-buttons button {
+  width: 50%;
+  float: left;
+  background-color: #3e9868;
+  cursor: pointer;
+}
+div.round-buttons button:first-child {
+  border-right: 1px solid #fff;
+}
+div.slide {
+  max-height: 0;
+  transition: max-height 0.5s;
+  overflow: hidden;
+}
+div.slide.active {
+  visibility: visible;
+  max-height: 1000px;
+}
+div.round-buttons button:first-child:after,
+div.round-buttons button:last-child:after {
+  font-family: icomoon;
+  font-size: 1.5em;
+}
+div.round-buttons button:first-child:after {
+  content: "\e125";
+}
+div.round-buttons button:last-child:after {
+  content: "\e121";
 }
 [class*='icon-']:after {
   font-family: icomoon;
@@ -260,4 +347,10 @@ div.browse-clubs div.search-wrapper input {
 }
 .icon-search:after {
   content: "\e080";
+}
+.icon-table:after {
+  content: "\e149";
+}
+.icon-table-2:after {
+  content: "\e14a";
 }
